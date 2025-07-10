@@ -3,3 +3,21 @@ numpy
 scikit-learn
 streamlit
 cloudpickle
+# Core dependencies
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.7.0
+joblib==1.4.2
+
+# Visualization (if needed in training or debugging)
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Streamlit for web app
+streamlit==1.35.0
+
+# Optional: Used during training but not required for the app
+# xgboost==2.0.3
+
+# Use cloudpickle if you switched from joblib (but joblib is simpler for sklearn pipelines)
+cloudpickle==3.0.0
