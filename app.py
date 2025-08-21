@@ -1,18 +1,21 @@
+import os
 import streamlit as st
 import pandas as pd
 import cloudpickle
-import os
-st.write("Current files in repo:", os.listdir("."))
 
+# Debug: show current directory and files
+st.write("📂 Current working directory:", os.getcwd())
+st.write("📄 Files in this directory:", os.listdir("."))
 
 # Load trained pipeline
 try:
-    with open('bigmart_sales_pipeline.pkl', 'rb') as f:
+    with open("bigmart_sales_pipeline.pkl", "rb") as f:
         pipeline = cloudpickle.load(f)
     model_loaded = True
 except Exception as e:
     st.error(f"❌ Failed to load the model: {e}")
     model_loaded = False
+
 
 # Streamlit App
 st.set_page_config(page_title="BigMart Sales Prediction", page_icon="🛒")
