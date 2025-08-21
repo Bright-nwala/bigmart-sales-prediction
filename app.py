@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import cloudpickle
+import os
+st.write("Current files in repo:", os.listdir("."))
+
 
 # Load trained pipeline
 try:
