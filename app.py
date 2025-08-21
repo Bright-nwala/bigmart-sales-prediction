@@ -1,21 +1,32 @@
-import os
 import streamlit as st
 import pandas as pd
 import cloudpickle
+import os
+import requests
 
-# Debug: show current directory and files
-st.write("📂 Current working directory:", os.getcwd())
-st.write("📄 Files in this directory:", os.listdir("."))
+MODEL_URL = "https://github.com/Bright-nwala/bigmart-sales-prediction/releases/download/v1/bigmart_sales_pipeline.pkl"
+MODEL_PATH = "bigmart_sales_pipeline.pkl"
+
+# Download model if not exists
+if not os.path.exists(MODEL_PATH):
+    try:
+        st.info("📥 Downloading model file, please wait...")
+        response = requests.get(MODEL_URL)
+        response.raise_for_status()
+        with open(MODEL_PATH, "wb") as f:
+            f.write(response.content)
+        st.success("✅ Model downloaded successfully!")
+    except Exception as e:
+        st.error(f"❌ Failed to download model: {e}")
 
 # Load trained pipeline
 try:
-    with open("bigmart_sales_pipeline.pkl", "rb") as f:
+    with open(MODEL_PATH, "rb") as f:
         pipeline = cloudpickle.load(f)
     model_loaded = True
 except Exception as e:
     st.error(f"❌ Failed to load the model: {e}")
     model_loaded = False
-
 
 # Streamlit App
 st.set_page_config(page_title="BigMart Sales Prediction", page_icon="🛒")
@@ -51,6 +62,7 @@ if uploaded_file and model_loaded:
         st.markdown("Make sure your CSV has **all required columns** used in training.")
 elif not uploaded_file:
     st.info("👈 Upload a CSV file to begin.")
+
 
 
 
