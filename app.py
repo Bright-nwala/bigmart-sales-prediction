@@ -3,13 +3,22 @@ import requests
 import streamlit as st
 import pandas as pd
 import cloudpickle
+import urllib.request
+
+MODEL_URL = "https://github.com/your-username/bigmart-sales-prediction/releases/download/v1.0/bigmart_model.pkl"
+MODEL_PATH = "bigmart_model.pkl"
+
+# Download model if not already present
+if not os.path.exists(MODEL_PATH):
+    with st.spinner("Downloading model..."):
+        urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+
+# Load model
+with open(MODEL_PATH, "rb") as f:
+    model = cloudpickle.load(f)
+
 
 st.set_page_config(page_title="BigMart Sales Prediction", page_icon="🛒")
-
-# ==== CONFIG: set your release asset URL here ====
-MODEL_URL = "https://github.com/Bright-nwala/bigmart-sales-prediction/releases/download/v1/bigmart_sales_pipeline.pkl"
-MODEL_PATH = "bigmart_sales_pipeline.pkl"
-# ================================================
 
 st.title("🛒 BigMart Sales Prediction App")
 st.markdown("Upload a CSV file with the **same features used during training** to get predicted sales.")
