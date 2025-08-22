@@ -13,7 +13,7 @@ st.set_page_config(page_title="BigMart Sales Prediction", page_icon="🛒")
 # Constants
 # -------------------------------
 MODEL_URL = "https://github.com/Bright-nwala/bigmart-sales-prediction/releases/download/v2/bigmart_sales_pipeline.pkl"
-MODEL_PATH = "bigmart_model.pkl"
+MODEL_PATH = "bigmart_sales_pipeline.pkl"
 
 # -------------------------------
 # Utility: Download & Load Model
